@@ -1,6 +1,10 @@
 import { ShoppingBag, ChevronRight, X, Text, Search, Play } from "lucide-react";
 import { useState } from "react";
 import sofa from "@/assets/sofa.png";
+import logo_1 from "@/assets/client_logo/logo_1.png";
+import logo_2 from "@/assets/client_logo/logo_2.png";
+import logo_3 from "@/assets/client_logo/logo_3.png";
+import logo_4 from "@/assets/client_logo/logo_4.png";
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -188,9 +192,9 @@ const App = () => {
         )}
       </header>
       <main>
-        <section className="w-full flex flex-col lg:flex-row h-[92vh] lg:h-[92vh]">
+        <section className="w-full flex flex-col lg:flex-row h-[92vh]">
           <div className="md:w-[63.75%] flex flex-col justify-center h-[56vh] md:h-auto">
-            <div className="w-[93%] flex justify-end">
+            <div className="w-full lg:w-[93%] flex justify-center lg:justify-end">
               <div className="w-[83.4%] h-full">
                 <h1 className="text-[32px] text-center md:text-start lg:text-[72px] font-bold leading-tight mb-4">
                   The kind of <span className="text-[#b0a16d]">furniture</span>{" "}
@@ -215,6 +219,9 @@ const App = () => {
               alt="sofa image"
               className="object-fill w-full h-full"
             />
+            <p className="absolute top-[5%] left-[9.2%] text-white font-semibold text-[14px] lg:hidden">
+              HIGHLIGHTED PRODUCT
+            </p>
             <div className="aspect-video absolute bottom-[12.3%] left-[9.2%]">
               <div className="bg-white/50 text-[14px] md:text-[24px] w-fit text-black text-sm font-semibold px-2 py-1 lg:px-[16px] lg:py-[8px] rounded-lg">
                 $329
@@ -231,14 +238,16 @@ const App = () => {
         </section>
         <section className="bg-[#2D221C] text-[#D6DD9E] h-[92vh]">
           {/* Top Section: Why Choose Us */}
-          <div className="w-[80.3%] h-[61.44%] mx-auto px-8 md:px-24 py-16 flex flex-col justify-center">
-            <p className="mb-2 text-[24px]">WHY CHOOSE US?</p>
-            <h2 className="text-4xl md:text-[64px] font-bold leading-tight mb-10">
+          <div className="w-[80.3%] h-[61.44%] mx-auto flex flex-col justify-center">
+            <p className="mb-2 text-[14px] lg:text-[24px] lg:text-start text-center">
+              WHY CHOOSE US?
+            </p>
+            <h2 className="text-[24px] lg:text-[64px] lg:text-start text-center font-bold leading-tight mb-5">
               We care about details and the quality of our products
             </h2>
 
-            <div className="w-full flex justify-center">
-              <div className="w-[80%] flex flex-col md:justify-center md:text-[24px] md:flex-row gap-10">
+            <div className="w-full flex lg:justify-center">
+              <div className="w-[80%] flex flex-col text-[14px] lg:justify-center lg:text-[24px] lg:flex-row gap-5">
                 {/* Feature 1 */}
                 <div className="flex items-center gap-5">
                   <div className="bg-[#B0A16D] rounded-md p-2 text-white">
@@ -273,19 +282,36 @@ const App = () => {
           </div>
 
           {/* Bottom Section: Partnered Brands */}
-          <div className="bg-white h-[38.66%] py-14 px-8 md:px-24">
-            <div className="text-center mb-10">
-              <h3 className="text-4xl font-bold mb-2">25+</h3>
-              <p className="text-sm text-gray-600">PARTNERED BRANDS</p>
-            </div>
+          <div className="bg-white h-[38.66%] flex justify-center">
+            <div className="lg:w-[80.3%] flex flex-col justify-center lg:justify-between items-center lg:flex-row lg:gap-10">
+              <div className="text-center lg:text-start mb-4">
+                <h3 className="text-4xl lg:text-[96px] font-bold mb-2 text-black">
+                  25+
+                </h3>
+                <p className="text-sm lg:text-[24px] text-gray-600">
+                  PARTNERED BRANDS
+                </p>
+              </div>
 
-            {/* Company Logos (placeholder red boxes) */}
-            <div className="flex flex-wrap justify-center gap-8">
-              <div className="w-24 h-12 bg-red-500 rounded" />
-              <div className="w-24 h-12 bg-red-500 rounded" />
-              <div className="w-24 h-12 bg-red-500 rounded" />
-              <div className="w-24 h-12 bg-red-500 rounded" />
-              <div className="w-24 h-12 bg-red-500 rounded" />
+              {/* Company Logos (placeholder red boxes) */}
+              <div className="flex flex-wrap justify-center gap-6 lg:gap-28">
+                <img
+                  src={logo_1}
+                  className="w-16 lg:w-28 aspect-video rounded"
+                />
+                <img
+                  src={logo_2}
+                  className="w-16 lg:w-28 aspect-video rounded"
+                />
+                <img
+                  src={logo_3}
+                  className="w-16 lg:w-28 aspect-video rounded"
+                />
+                <img
+                  src={logo_4}
+                  className="w-16 lg:w-28 aspect-video rounded"
+                />
+              </div>
             </div>
           </div>
         </section>
