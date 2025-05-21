@@ -5,11 +5,65 @@ import logo_1 from "@/assets/client_logo/logo_1.png";
 import logo_2 from "@/assets/client_logo/logo_2.png";
 import logo_3 from "@/assets/client_logo/logo_3.png";
 import logo_4 from "@/assets/client_logo/logo_4.png";
+import foto1 from "@/assets/setion_product/foto_1.jpg";
+import foto2 from "@/assets/setion_product/foto_2.jpg";
+import foto3 from "@/assets/setion_product/foto_3.jpg";
+
+type Category = {
+  id: string;
+  name: string;
+  description: string;
+  bgColor: string;
+  active: boolean;
+};
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isFurnitureDropdownOpen, setFurnitureDropdownOpen] = useState(false);
   const [isMobileFurnitureOpen, setMobileFurnitureOpen] = useState(false);
+  const [categories, setCategories] = useState<Category[]>([
+    {
+      id: "bedroom",
+      name: "Bedroom",
+      description:
+        "Create your perfect sleep sanctuary with comfortable and stylish designs",
+      bgColor: "bg-white",
+      active: false,
+    },
+    {
+      id: "livingRoom",
+      name: "Living Room",
+      description:
+        "Enjoy a great living room aesthetics with your family\nDesigns created for increased comfortability",
+      bgColor: "bg-white",
+      active: false,
+    },
+    {
+      id: "homeOffice",
+      name: "Home Office",
+      description: "Productive work spaces designed for focus and efficiency",
+      bgColor: "bg-white",
+      active: false,
+    },
+    {
+      id: "gamingRoom",
+      name: "Gaming Room",
+      description:
+        "Level up your gaming experience with ergonomic and tech-friendly furniture",
+      bgColor: "bg-white",
+      active: false,
+    },
+  ]);
+
+  const handleCategoryClick = (selectedId: string) => {
+    setCategories(
+      categories.map((category) => ({
+        ...category,
+        active: category.id === selectedId,
+        bgColor: category.id === selectedId ? "bg-[#E5F0B6]" : "bg-white",
+      }))
+    );
+  };
 
   return (
     <div className="min-h-screen font-sans">
@@ -237,7 +291,6 @@ const App = () => {
           </div>
         </section>
         <section className="bg-[#2D221C] text-[#D6DD9E] h-[92vh]">
-          {/* Top Section: Why Choose Us */}
           <div className="w-[80.3%] h-[61.44%] mx-auto flex flex-col justify-center">
             <p className="mb-2 text-[14px] lg:text-[24px] lg:text-start text-center">
               WHY CHOOSE US?
@@ -248,7 +301,6 @@ const App = () => {
 
             <div className="w-full flex lg:justify-center">
               <div className="w-[80%] flex flex-col text-[14px] lg:justify-center lg:text-[24px] lg:flex-row gap-5">
-                {/* Feature 1 */}
                 <div className="flex items-center gap-5">
                   <div className="bg-[#B0A16D] rounded-md p-2 text-white">
                     <Search />
@@ -258,7 +310,6 @@ const App = () => {
                   </p>
                 </div>
 
-                {/* Feature 2 */}
                 <div className="flex items-center gap-5">
                   <div className="bg-[#B0A16D] rounded-md px-2 py-1.5 w-10 text-center text-xl font-bold">
                     5
@@ -281,7 +332,6 @@ const App = () => {
             </div>
           </div>
 
-          {/* Bottom Section: Partnered Brands */}
           <div className="bg-white h-[38.66%] flex justify-center">
             <div className="lg:w-[80.3%] flex flex-col justify-center lg:justify-between items-center lg:flex-row lg:gap-10">
               <div className="text-center lg:text-start mb-4">
@@ -293,7 +343,6 @@ const App = () => {
                 </p>
               </div>
 
-              {/* Company Logos (placeholder red boxes) */}
               <div className="flex flex-wrap justify-center gap-6 lg:gap-28">
                 <img
                   src={logo_1}
@@ -305,7 +354,7 @@ const App = () => {
                 />
                 <img
                   src={logo_3}
-                  className="w-16 lg:w-28 aspect-video rounded"
+                  className="w-16 lg:w-32 aspect-video rounded"
                 />
                 <img
                   src={logo_4}
@@ -314,6 +363,87 @@ const App = () => {
               </div>
             </div>
           </div>
+        </section>
+
+        <section className="hidden lg:flex w-full h-[92vh] items-center gap-12">
+          <div className="w-[56.7%] h-[76.6%] flex gap-10">
+            {[foto1, foto2, foto3].map((foto, i) => (
+              <div className="w-full h-full flex-1 transition-all rounded-2xl duration-500 hover:flex-[4] overflow-hidden">
+                <img
+                  src={foto}
+                  alt={`foto background ${i + 1}`}
+                  className="object-cover w-full h-[1000px]"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="w-[36.3%] h-[76.6%] flex flex-col gap-20">
+            <h3 className="text-[24px] text-[#2F241F]">Categories</h3>
+            <h2 className="text-[48px] text-[#2F241F] font-bold leading-14">
+              Furniture Sets Recommendations
+            </h2>
+            <div className="flex h-full flex-col rounded-xl overflow-hidden">
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className={`${
+                    category.active ? "flex-[3]" : "flex-1"
+                  } px-10 flex flex-col justify-center p-4 cursor-pointer ${
+                    category.bgColor
+                  }`}
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  <h3 className="font-semibold text-[18px] text-gray-900">
+                    {category.name}
+                  </h3>
+                  {category.active && (
+                    <p className="text-md text-gray-600 mt-1 whitespace-pre-line">
+                      {category.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="flex flex-col lg:hidden w-full h-[92vh] justify-center items-center gap-6">
+          <h3 className="text-[14px] text-[#2F241F]">Categories</h3>
+          <h2 className="text-[24px] text-center font-bold text-[#2F241F]"> Furniture Sets Recommendations</h2>
+          <div className="w-[80.3%] flex flex-col rounded-xl overflow-hidden">
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className={`${
+                    category.active ? "flex-[3]" : "flex-1"
+                  } px-10 flex flex-col p-4 cursor-pointer ${
+                    category.bgColor
+                  }`}
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  <h3 className="font-semibold text-[18px] text-gray-900">
+                    {category.name}
+                  </h3>
+                  {category.active && (
+                    <p className="text-md text-gray-600 mt-1 whitespace-pre-line">
+                      {category.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          <div className="flex gap-3">
+            {[foto1, foto2, foto3].map((foto, i) => (
+              <div className="w-full h-full flex-1 transition-all rounded-2xl duration-500 hover:flex-[4] overflow-hidden">
+                <img
+                  src={foto}
+                  alt={`foto background ${i + 1}`}
+                  className="object-cover w-[100px] aspect-square"
+                />
+              </div>
+            ))}
+          </div>
+          
         </section>
       </main>
     </div>
