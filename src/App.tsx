@@ -407,43 +407,45 @@ const App = () => {
           </div>
         </section>
 
-        <section className="flex flex-col lg:hidden w-full h-[92vh] justify-center items-center gap-6">
-          <h3 className="text-[14px] text-[#2F241F]">Categories</h3>
-          <h2 className="text-[24px] text-center font-bold text-[#2F241F]"> Furniture Sets Recommendations</h2>
-          <div className="w-[80.3%] flex flex-col rounded-xl overflow-hidden">
+        <section className="flex lg:hidden w-full h-[92vh] justify-center items-center">
+          <div className="w-[80.3%] flex flex-col gap-4">
+            <h3 className="text-[14px] text-center text-[#2F241F]">Categories</h3>
+            <h2 className="text-[24px] text-center font-bold text-[#2F241F]">
+              {" "}
+              Furniture Sets Recommendations
+            </h2>
+            <div className="flex flex-col rounded-xl overflow-hidden">
               {categories.map((category) => (
                 <div
                   key={category.id}
                   className={`${
                     category.active ? "flex-[3]" : "flex-1"
-                  } px-10 flex flex-col p-4 cursor-pointer ${
-                    category.bgColor
-                  }`}
+                  } px-10 flex flex-col p-4 cursor-pointer ${category.bgColor}`}
                   onClick={() => handleCategoryClick(category.id)}
                 >
-                  <h3 className="font-semibold text-[18px] text-gray-900">
+                  <h3 className="font-semibold text-[14px] text-gray-900">
                     {category.name}
                   </h3>
                   {category.active && (
-                    <p className="text-md text-gray-600 mt-1 whitespace-pre-line">
+                    <p className="text-sm text-gray-600 mt-1 whitespace-pre-line">
                       {category.description}
                     </p>
                   )}
                 </div>
               ))}
             </div>
-          <div className="flex gap-3">
-            {[foto1, foto2, foto3].map((foto, i) => (
-              <div className="w-full h-full flex-1 transition-all rounded-2xl duration-500 hover:flex-[4] overflow-hidden">
-                <img
-                  src={foto}
-                  alt={`foto background ${i + 1}`}
-                  className="object-cover w-[100px] aspect-square"
-                />
-              </div>
-            ))}
+            <div className="flex gap-3">
+              {[foto1, foto2, foto3].map((foto, i) => (
+                <div className="w-full h-full flex-1 transition-all rounded-2xl duration-500 hover:flex-[4] overflow-hidden">
+                  <img
+                    src={foto}
+                    alt={`foto background ${i + 1}`}
+                    className="object-cover w-[100px] aspect-square"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          
         </section>
       </main>
     </div>
