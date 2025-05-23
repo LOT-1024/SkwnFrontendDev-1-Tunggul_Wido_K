@@ -8,6 +8,11 @@ import logo_4 from "@/assets/client_logo/logo_4.png";
 import foto1 from "@/assets/setion_product/foto_1.jpg";
 import foto2 from "@/assets/setion_product/foto_2.jpg";
 import foto3 from "@/assets/setion_product/foto_3.jpg";
+import top2 from "@/assets/section_swiper/top2.jpg";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 type Category = {
   id: string;
@@ -16,6 +21,14 @@ type Category = {
   bgColor: string;
   active: boolean;
 };
+
+const products = [
+  { id: 1, name: "Und Chair", price: "$329" },
+  { id: 2, name: "Product 2", price: "$210" },
+  { id: 3, name: "Product 3", price: "$159" },
+  { id: 4, name: "Product 4", price: "$89" },
+  { id: 5, name: "Product 5", price: "$120" },
+];
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,6 +77,7 @@ const App = () => {
       }))
     );
   };
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <div className="min-h-screen font-sans">
@@ -388,7 +402,7 @@ const App = () => {
                   key={category.id}
                   className={`${
                     category.active ? "flex-[3]" : "flex-1"
-                  } px-10 flex flex-col justify-center p-4 cursor-pointer ${
+                  } px-10 flex flex-col justify-center p-4 cursor-pointer transition-all duration-300 transform ${
                     category.bgColor
                   }`}
                   onClick={() => handleCategoryClick(category.id)}
@@ -409,7 +423,9 @@ const App = () => {
 
         <section className="flex lg:hidden w-full h-[92vh] justify-center items-center">
           <div className="w-[80.3%] flex flex-col gap-4">
-            <h3 className="text-[14px] text-center text-[#2F241F]">Categories</h3>
+            <h3 className="text-[14px] text-center text-[#2F241F]">
+              Categories
+            </h3>
             <h2 className="text-[24px] text-center font-bold text-[#2F241F]">
               {" "}
               Furniture Sets Recommendations
@@ -446,6 +462,85 @@ const App = () => {
               ))}
             </div>
           </div>
+        </section>
+
+        <section className="hidden lg:flex flex-col justify-center bg-[#2F241F] text-[#E5F0B6] h-[92vh] relative">
+          <div className="w-[80.3%] mx-auto flex justify-between items-center mb-4">
+            <div className="text-[#E5F0B6]">
+              <p className="text-[24px] uppercase">Our Products</p>
+              <h2 className="text-[48px] font-bold">
+                This month's best seller
+              </h2>
+            </div>
+            <button className="bg-[#E5F0B6] w-[13.235%] h-[51%] text-[#2F241F] text-[16px] rounded-xl flex items-center justify-center">
+              See More
+            </button>
+          </div>
+
+          <Swiper
+            initialSlide={0}
+            slidesPerView="auto"
+            centeredSlides={true}
+            loop={true}
+            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            modules={[Navigation]}
+            className="relative w-full h-[60.358%]"
+          >
+            {products.map((product, index) => (
+              <SwiperSlide key={product.id} className="!w-[20.83%] ml-10">
+                <div className="h-full">
+                  <div
+                    className={`relative transition-all duration-300 transform rounded-xl
+                      ${
+                        index === activeIndex
+                          ? "h-full bg-red-500"
+                          : "h-[84.75%] bg-gradient-to-b from-gray-200 to-gray-400"
+                      }
+                    `}
+                  >
+                    <div className="absolute top-0 z-10 bg-gradient-to-t from-gray-700 to-white opacity-40 w-full h-full rounded-xl"></div>
+                    <img
+                      src={top2}
+                      alt="product"
+                      className="absolute top-0 object-cover w-full h-full rounded-xl"
+                    />
+                    <div
+                      className={`relative ${
+                        index === activeIndex ? "h-[67.4%]" : "hidden"
+                      }`}
+                    />
+                    <div
+                      className={`relative ${
+                        index === activeIndex
+                          ? "h-[32.6%]"
+                          : "hidden"
+                      }`}
+                    >
+                      <div className="w-[64.83%] mx-auto">
+                        <div className="bg-white/50 text-[14px] md:text-[24px] w-fit text-black text-sm font-semibold px-2 py-1 lg:px-[16px] lg:py-[8px] rounded-lg">
+                          $329
+                        </div>
+                        <h2 className="text-[48px] text-white font-semibold mb-2">
+                          Und Chair
+                        </h2>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <button className="swiper-button-prev bg-lime-200 rounded-full !w-14 !h-14 flex items-center justify-center !text-5xl !text-[#2F241F] !top-[85%] !left-[81%]">
+            &#x2039;
+          </button>
+          <button className="swiper-button-next bg-lime-200 rounded-full !w-14 !h-14 flex items-center justify-center !text-5xl !text-[#2F241F] !top-[85%] !left-[86%]">
+            &#x203A;
+          </button>
         </section>
       </main>
     </div>
