@@ -1,4 +1,4 @@
-import { ShoppingBag, ChevronRight, X, Text, Search, Play } from "lucide-react";
+import { ShoppingBag, ChevronRight, X, Text, Search, Play, Mail } from "lucide-react";
 import { useState } from "react";
 import sofa from "@/assets/sofa.png";
 import logo_1 from "@/assets/client_logo/logo_1.png";
@@ -82,6 +82,12 @@ const App = () => {
     );
   };
   const [activeIndex, setActiveIndex] = useState(0);
+  const [email, setEmail] = useState('');
+
+  const handleSubmit = () => {
+    console.log('Email submitted:', email);
+    // Handle email submission logic here
+  };
 
   return (
     <div className="min-h-screen font-sans">
@@ -440,14 +446,14 @@ const App = () => {
                   key={category.id}
                   className={`${
                     category.active ? "flex-[3]" : "flex-1"
-                  } px-10 flex flex-col p-4 cursor-pointer ${category.bgColor}`}
+                  } px-10 flex flex-col p-4 cursor-pointer transition-all duration-300 transform ${category.bgColor}`}
                   onClick={() => handleCategoryClick(category.id)}
                 >
                   <h3 className="font-semibold text-[14px] text-gray-900">
                     {category.name}
                   </h3>
                   {category.active && (
-                    <p className="text-sm text-gray-600 mt-1 whitespace-pre-line">
+                    <p className="text-sm text-gray-600 mt-1 whitespace-pre-line transition-all duration-500 transform">
                       {category.description}
                     </p>
                   )}
@@ -506,7 +512,11 @@ const App = () => {
                       }
                     `}
                   >
-                    <div className={`absolute top-0 z-10 bg-gradient-to-t from-gray-700 to-white  ${ index === activeIndex ? "opacity-10":"opacity-40"} w-full h-full rounded-xl`}></div>
+                    <div
+                      className={`absolute top-0 z-10 bg-gradient-to-t transition-all duration-400 from-gray-700 to-white  ${
+                        index === activeIndex ? "opacity-10" : "opacity-40"
+                      } w-full h-full rounded-xl`}
+                    ></div>
                     <img
                       src={product.picture}
                       alt="product"
@@ -519,9 +529,7 @@ const App = () => {
                     />
                     <div
                       className={`relative z-30 ${
-                        index === activeIndex
-                          ? "min-h-[32.6%]"
-                          : "hidden"
+                        index === activeIndex ? "min-h-[32.6%]" : "hidden"
                       }`}
                     >
                       <div className="w-[64.83%] mx-auto">
@@ -547,7 +555,98 @@ const App = () => {
           </button>
         </section>
 
-        
+        <section className="flex lg:hidden h-[92vh] relative w-full bg-[#2F241F]">
+
+        </section>
+
+        <div className="bg-gray-50 min-h-screen">
+      {/* Main membership section */}
+      <div className="max-w-4xl mx-auto px-6 py-16">
+        <div className="text-center mb-12">
+          <p className="text-sm font-medium text-gray-600 mb-4 tracking-wide uppercase">
+            Limited Deals
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+            Become a member and get 10% off of<br />
+            your first purchase
+          </h1>
+          
+          {/* Email signup form */}
+          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email here"
+              className="flex-1 px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
+            />
+            <button
+              onClick={handleSubmit}
+              className="bg-yellow-300 hover:bg-yellow-400 px-6 py-3 rounded-md transition-colors duration-200 flex items-center justify-center"
+            >
+              <Mail className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer section */}
+      <footer className="bg-white py-12 px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Company info */}
+            <div className="md:col-span-1">
+              <div className="flex items-center mb-4">
+                <div className="w-8 h-8 bg-amber-800 rounded-full mr-2"></div>
+                <span className="font-semibold text-gray-900">Dekoor</span>
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Dekoor is a furniture company created to fulfill the needs of family,
+                with aesthetic feeling in their furniture. Always pay attention to
+                details and give clear communication for the customers. Priority of
+                our design is comfortability.
+              </p>
+              <p className="text-xs text-gray-500 mt-4">
+                ©Copyright 2022 Dekoor
+              </p>
+            </div>
+
+            {/* Support */}
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-4">Support</h3>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">FAQ</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Shipping & Returns</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Care guide</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Redeem warranty</a></li>
+              </ul>
+            </div>
+
+            {/* Social Media */}
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-4">Social Media</h3>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Instagram</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Facebook</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Twitter</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">TikTok</a></li>
+              </ul>
+            </div>
+
+            {/* About Us */}
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-4">About Us</h3>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Our story</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Designer</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Craftmanship</a></li>
+                <li><a href="#" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">Sustainability</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
       </main>
     </div>
   );
