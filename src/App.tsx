@@ -8,7 +8,11 @@ import logo_4 from "@/assets/client_logo/logo_4.png";
 import foto1 from "@/assets/setion_product/foto_1.jpg";
 import foto2 from "@/assets/setion_product/foto_2.jpg";
 import foto3 from "@/assets/setion_product/foto_3.jpg";
+import top1 from "@/assets/section_swiper/top1.jpg";
 import top2 from "@/assets/section_swiper/top2.jpg";
+import top3 from "@/assets/section_swiper/top3.jpg";
+import top4 from "@/assets/section_swiper/top4.jpg";
+import top5 from "@/assets/section_swiper/top5.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -23,11 +27,11 @@ type Category = {
 };
 
 const products = [
-  { id: 1, name: "Und Chair", price: "$329" },
-  { id: 2, name: "Product 2", price: "$210" },
-  { id: 3, name: "Product 3", price: "$159" },
-  { id: 4, name: "Product 4", price: "$89" },
-  { id: 5, name: "Product 5", price: "$120" },
+  { id: 1, name: "Und Sofa", price: "$210", picture: top1 },
+  { id: 2, name: "Und Chair", price: "$329", picture: top2 },
+  { id: 3, name: "Und Table", price: "$159", picture: top3 },
+  { id: 4, name: "Und Self", price: "$89", picture: top4 },
+  { id: 5, name: "Und Sofa", price: "$120", picture: top5 },
 ];
 
 const App = () => {
@@ -502,30 +506,30 @@ const App = () => {
                       }
                     `}
                   >
-                    <div className="absolute top-0 z-10 bg-gradient-to-t from-gray-700 to-white opacity-40 w-full h-full rounded-xl"></div>
+                    <div className={`absolute top-0 z-10 bg-gradient-to-t from-gray-700 to-white  ${ index === activeIndex ? "opacity-10":"opacity-40"} w-full h-full rounded-xl`}></div>
                     <img
-                      src={top2}
+                      src={product.picture}
                       alt="product"
                       className="absolute top-0 object-cover w-full h-full rounded-xl"
                     />
                     <div
                       className={`relative ${
-                        index === activeIndex ? "h-[67.4%]" : "hidden"
+                        index === activeIndex ? "min-h-[67.4%]" : "hidden"
                       }`}
                     />
                     <div
-                      className={`relative ${
+                      className={`relative z-30 ${
                         index === activeIndex
-                          ? "h-[32.6%]"
+                          ? "min-h-[32.6%]"
                           : "hidden"
                       }`}
                     >
                       <div className="w-[64.83%] mx-auto">
-                        <div className="bg-white/50 text-[14px] md:text-[24px] w-fit text-black text-sm font-semibold px-2 py-1 lg:px-[16px] lg:py-[8px] rounded-lg">
-                          $329
+                        <div className="bg-white/30 text-[14px] md:text-[24px] w-fit text-black text-sm font-semibold px-2 py-1 lg:px-[16px] lg:py-[8px] rounded-lg">
+                          {product.price}
                         </div>
                         <h2 className="text-[48px] text-white font-semibold mb-2">
-                          Und Chair
+                          {product.name}
                         </h2>
                       </div>
                     </div>
@@ -542,6 +546,8 @@ const App = () => {
             &#x203A;
           </button>
         </section>
+
+        
       </main>
     </div>
   );
